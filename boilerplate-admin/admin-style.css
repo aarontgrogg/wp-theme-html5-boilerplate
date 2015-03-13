@@ -1,8 +1,7 @@
 /* body.settings_page_boilerplate-admin */
 #boilerplate-options-wrap {
-  width: 100%;
   max-width: 900px;
-  padding: 3em;
+  padding: 3em 0;
 }
 
 #boilerplate-options-wrap h2 {
@@ -16,7 +15,6 @@
 
 #boilerplate-options-wrap input[type="checkbox"] {
   float:left;
-  margin:0 6px 0 -20px;
 }
 
 #boilerplate-options-wrap p input {
@@ -31,12 +29,13 @@
 	background:#ccc;
 }
 
+#boilerplate-options-wrap table.form-table th,
 #boilerplate-options-wrap table.form-table td {
-	padding:8px 10px 8px 20px;
+	padding:8px 10px;
 }
 
 #boilerplate-options-wrap table.form-table p {
-	margin:0 0 1px;
+	margin:0 0 .75em;
 	color:#444;
 }
 

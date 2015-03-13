@@ -13,11 +13,11 @@
 		to whatever Child (<a href="http://codex.wordpress.org/Child_Themes">http://codex.wordpress.org/Child_Themes</a>) you care to add,
 		but you could just as easily use this as a starting point and alter the PHP as your design needs.
 		More about this theme can be found at <a href="http://aarontgrogg.com/boilerplate/">http://aarontgrogg.com/boilerplate/</a>.
+	Version: 5.0.1
 	Author: Aaron T. Grogg, based on the work of Paul Irish, Divya Manian, and Elliot Jay Stocks
 	Author URI: http://aarontgrogg.com/
-	Version: 4.3.1
+	Version: 5.0.1
 	Tags: custom-menu, editor-style, theme-options, threaded-comments, sticky-post, microformats, rtl-language-support, translation-ready
-
 	License: GNU General Public License v2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -121,6 +121,7 @@
 				add_settings_field('H5BP_jquery_js', 'jQuery JS?:', 'H5BP_jquery_js_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_plugins_js', 'jQuery Plug-ins JS?:', 'H5BP_plugins_js_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_site_js', 'Site-specific JS?:', 'H5BP_site_js_setting', 'boilerplate-admin', 'main_section');
+				add_settings_field('H5BP_google_analytics_js', 'Google Analytics?:', 'H5BP_google_analytics_js_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_search_form', 'HTML5 Search?:', 'H5BP_search_form_setting', 'boilerplate-admin', 'main_section');
 				add_settings_field('H5BP_cache_buster', 'Cache-Buster?:', 'H5BP_cache_buster_setting', 'boilerplate-admin', 'main_section');
 			}
@@ -210,10 +211,10 @@
 			function H5BP_viewport_setting() {
 				$options = get_option('plugin_options');
 				$checked = (isset($options['H5BP_viewport']) && $options['H5BP_viewport']) ? 'checked="checked" ' : '';
-				$setting = (isset($options['H5BP_viewport_setting']) && $options['H5BP_viewport_setting']) ? $options['H5BP_viewport_setting'] : 'width=device-width';
+				$setting = (isset($options['H5BP_viewport_setting']) && $options['H5BP_viewport_setting']) ? $options['H5BP_viewport_setting'] : 'width=device-width, initial-scale=1';
 				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_viewport]" value="true" ' .$checked. '/>';
 				echo '<p>Force <em><abbr title="iPhone, iTouch, iPad...">iThings</abbr></em> to <a href="http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html#//apple_ref/doc/uid/TP40006509-SW19">show site at full-zoom</a>, instead of trying to show the entire page.</p>';
-				echo '<p>The HTML5 Boilerplate project suggests using just <code>width=device-width</code>, but you can use <a href="http://developer.apple.com/library/safari/#documentation/appleapplications/reference/safariwebcontent/usingtheviewport/usingtheviewport.html">any option you want</a>:</p>';
+				echo '<p>The HTML5 Boilerplate project suggests using just <code>width=device-width, initial-scale=1</code>, but you can use <a href="http://developer.apple.com/library/safari/#documentation/appleapplications/reference/safariwebcontent/usingtheviewport/usingtheviewport.html">any option you want</a>:</p>';
 				echo '<p><input type="text" size="40" name="plugin_options[H5BP_viewport_setting]" value="'.$setting.'"></p>';
 				echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages:</p>';
 				echo '<code>&lt;meta name="viewport" content="'.$setting.'"&gt;</code>';
@@ -276,10 +277,10 @@
 				echo '<p><a href="http://modernizr.com/">Modernizr</a> is a JS library that appends classes to the <code>&lt;html&gt;</code> that indicate whether the user\'s browser is capable of handling advanced CSS, like "cssreflections" or "no-cssreflections".  It\'s a really handy way to apply varying CSS techniques, depending on the user\'s browser\'s abilities, without resorting to CSS hacks.</p>';
 				echo '<p>Selecting this option will add the following code to the <code>&lt;head&gt;</code> of your pages (note the lack of a version, when you\'re ready to upgrade, simply copy/paste the new version into the file below, and your site is ready to go!):</p>';
 				echo '<code>&lt;script src="' .H5BP_URL. '/js/modernizr.js"&gt;&lt;/script&gt;</code>';
-				echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the IEShiv JS <em>will</em> be added to weaker browsers to accommodate the HTML5 elements used in Boilerplate:</strong></p>';
+				echo '<p><strong>Note: If you do <em>not</em> include Modernizr, the <a href="https://github.com/aFarkas/html5shiv#html5shiv-printshivjs">html5shiv-printshiv.js</a> <em>will</em> be added to accommodate the HTML5 elements used in Boilerplate in weaker browsers and make them ready for printing, you know, just in case:</strong></p>';
 				echo '<code>&lt;!--[if lt IE 9]&gt;</code>';
 				echo '<code>	&lt;script src="//html5shiv.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;</code>';
-				echo '<code>	&lt;script&gt;window.html5 || document.write(unescape(\'%3Cscript src="' .H5BP_URL. '/js/ieshiv.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
+				echo '<code>	&lt;script&gt;window.html5 || document.write(unescape(\'%3Cscript src="' .H5BP_URL. '/js/html5shiv.js"%3E%3C/script%3E\'))&lt;/script&gt;</code>';
 				echo '<code>&lt;![endif]--&gt;</code>';
 			}
 		endif; // H5BP_modernizr_js_setting
@@ -354,6 +355,27 @@
 				echo '<strong>Note: <a href="http://developer.yahoo.com/blogs/ydn/posts/2007/07/high_performanc_5/">Best-practices</a> recommend that you load JS as close to the <code>&lt;/body&gt;</code> as possible.  If for some reason you would prefer your site-specific JS to be in the <code>&lt;head&gt;</code>, please select this option.</strong></p>';
 			}
 		endif; // H5BP_site_js_setting
+
+		//	callback fn for H5BP_google_analytics_js
+		if ( ! function_exists( 'H5BP_google_analytics_js_setting' ) ):
+			function H5BP_google_analytics_js_setting() {
+				$options = get_option('plugin_options');
+				$checked = (isset($options['H5BP_google_analytics_js']) && $options['H5BP_google_analytics_js'] && isset($options['H5BP_google_analytics_account']) && $options['H5BP_google_analytics_account'] && $options['H5BP_google_analytics_account'] !== 'XXXXX-X') ? 'checked="checked" ' : '';
+				$account = (isset($options['H5BP_google_analytics_account']) && $options['H5BP_google_analytics_account']) ? str_replace('UA-','',$options['H5BP_google_analytics_account']) : 'XXXXX-X';
+				$msg = ($account === 'XXXXX-X') ? ', where </code>XXXXX-X</code> will be replaced with the code you insert above' : '';
+				echo '<input class="check-field" type="checkbox" name="plugin_options[H5BP_google_analytics_js]" value="true" ' .$checked. '/>';
+				echo '<p>To include Google Analytics, select this option and include your account number here:<br />';
+				echo 'UA-<input type="text" size="6" name="plugin_options[H5BP_google_analytics_account]" value="'.$account.'" onfocus="javascript:if(this.value===\'XXXXX-X\'){this.select();}"></p>';
+				echo '<p>Selecting this option will add the following code to your pages just before the <code>&lt;/body&gt;</code>'.$msg.':</p>';
+				echo '<code>&lt;script&gt;</code>';
+				echo '<code>var _gaq=[["_setAccount","UA-'.(($account !== 'XXXXX-X') ? $account : 'XXXXX-X').'"],["_trackPageview"]];</code>';
+				echo '<code>(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;</code>';
+				echo '<code>g.src="//www.google-analytics.com/ga.js";</code>';
+				echo '<code>s.parentNode.insertBefore(g,s)}(document,"script"));</code>';
+				echo '<code>&lt;/script&gt;</code>';
+				echo '<p><strong>Note: You must check the box <em>and</em> provide a UA code for this to be added to your pages.</strong></p>';
+			}
+		endif; // H5BP_google_analytics_js_setting
 
 		//	callback fn for H5BP_search_form
 		if ( ! function_exists( 'H5BP_search_form_setting' ) ):
@@ -450,22 +472,22 @@
 		if ( ! function_exists( 'H5BP_add_modernizr_script' ) ):
 			function H5BP_add_modernizr_script() {
 				$cache = H5BP_cache_buster();
-				wp_deregister_script( 'ieshiv' ); // get rid of IEShiv if it somehow got called too (IEShiv is included in Modernizr)
+				wp_deregister_script( 'html5shiv' ); // get rid of html5shiv if it somehow got called too (html5shiv is included in Modernizr)
 				wp_deregister_script( 'modernizr' ); // get rid of any native Modernizr
 				echo '<script src="' .H5BP_URL. '/js/modernizr.js'.$cache.'"></script>'.PHP_EOL;
 			}
 		endif; // H5BP_add_modernizr_script
 
-		//	$options['ieshiv_script']
-		if ( ! function_exists( 'H5BP_add_ieshiv_script' ) ):
-			function H5BP_add_ieshiv_script() {
+		//	$options['H5BP_html5shiv_script']
+		if ( ! function_exists( 'H5BP_add_html5shiv_script' ) ):
+			function H5BP_add_html5shiv_script() {
 				$cache = H5BP_cache_buster();
 				echo '<!--[if lt IE 9]>'.PHP_EOL;
 				echo '	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>'.PHP_EOL; // try getting from CDN
-				echo '	<script>window.html5 || document.write(unescape(\'%3Cscript src="' .H5BP_URL. '/js/ieshiv.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
+				echo '	<script>window.html5 || document.write(unescape(\'%3Cscript src="' .H5BP_URL. '/js/html5shiv.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 				echo '<![endif]-->'.PHP_EOL;
 			}
-		endif; // H5BP_add_ieshiv_script
+		endif; // H5BP_add_html5shiv_script
 
 		//	$options['H5BP_respond_js']
 		if ( ! function_exists( 'H5BP_add_respond_script' ) ):
@@ -480,7 +502,7 @@
 			function H5BP_add_jquery_script() {
 				$cache = H5BP_cache_buster();
 				$options = get_option('plugin_options');
-				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.10.2';
+				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.11.2';
 				wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js"></script>'.PHP_EOL; // try getting from CDN
 				echo '<script>window.jQuery || document.write(unescape(\'%3Cscript src="' .H5BP_URL. '/js/jquery.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
@@ -502,6 +524,20 @@
 				echo '<script src="' .H5BP_URL. '/js/script.js'.$cache.'"></script>'.PHP_EOL;
 			}
 		endif; // H5BP_add_site_script
+
+		//	$options['H5BP_google_analytics_js']
+		if ( ! function_exists( 'H5BP_add_google_analytics_script' ) ):
+			function H5BP_add_google_analytics_script() {
+				$options = get_option('plugin_options');
+				$account = $options['H5BP_google_analytics_account'];
+				echo PHP_EOL.'<script>'.PHP_EOL;
+				echo 'var _gaq=[["_setAccount","UA-'.str_replace('UA-','',$account).'"],["_trackPageview"]];'.PHP_EOL;
+				echo '(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];'.PHP_EOL;
+				echo 'g.src="//www.google-analytics.com/ga.js";'.PHP_EOL;
+				echo 's.parentNode.insertBefore(g,s)}(document,"script"));'.PHP_EOL;
+				echo '</script>'.PHP_EOL;
+			}
+		endif; // H5BP_add_google_analytics_script
 
 		//	$options['H5BP_search_form']
 		if ( ! function_exists( 'H5BP_search_form' ) ):
@@ -564,8 +600,8 @@
 			if (isset($options['H5BP_modernizr_js']) && $options['H5BP_modernizr_js']) {
 				add_action('wp_print_styles', 'H5BP_add_modernizr_script');
 			} else {
-				// if Modernizr isn't selected, add IEShiv inside an IE Conditional Comment
-				add_action('wp_print_styles', 'H5BP_add_ieshiv_script');
+				// if Modernizr isn't selected, add html5shiv inside an IE Conditional Comment
+				add_action('wp_print_styles', 'H5BP_add_html5shiv_script');
 			}
 
 			if (isset($options['H5BP_respond_js']) && $options['H5BP_respond_js']) {
@@ -590,6 +626,10 @@
 				// check if should be loaded in <head> or at end of <body>
 				$hook = (isset($options['H5BP_site_head']) && $options['H5BP_site_head']) ? 'wp_print_styles' : 'wp_footer';
 				add_action($hook, 'H5BP_add_site_script');
+			}
+
+			if (isset($options['H5BP_google_analytics_js']) && $options['H5BP_google_analytics_js'] && isset($options['H5BP_google_analytics_account']) && $options['H5BP_google_analytics_account'] && $options['H5BP_google_analytics_account'] !== 'XXXXX-X') {
+				add_action('wp_footer', 'H5BP_add_google_analytics_script');
 			}
 
 			if (isset($options['H5BP_search_form']) && $options['H5BP_search_form']) {

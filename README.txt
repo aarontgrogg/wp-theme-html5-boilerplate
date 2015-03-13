@@ -1,12 +1,12 @@
-=== Theme Name ===
+=== HTML5 Boilerplate ===
 Contributors: aarontgrogg
 Tags: html5, boilerplate
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 4.4.2
+Stable tag: 5.0.1
 
-Based on the [HTML5 Boilerplate](http://html5boilerplate.com/) created by
-[Paul Irish](http://paulirish.com/) and [Divya Manian](http://nimbupani.com/),
+Based on the HTML5 Boilerplate (http://html5boilerplate.com/) created by
+Paul Irish (http://paulirish.com/) and Divya Manian (http://nimbupani.com/),
 this plug-in allows for easy inclusion and removal of all HTML5 Boilerplate options
 that are pertinent to WP.
 
@@ -97,6 +97,25 @@ aarontgrogg@gmail.com
 
 
 === Change Log ===
+
+= 5.0.1 2015-03-13 =
+* The first update in nearly two years, on Friday the 13th...  What could go wrong??  ;-)
+* Updated `css/site-specific.css` with latest `normal.css` and `main.css`
+* Removed `docs/*`; if you want this, please refer to https://github.com/h5bp/html5-boilerplate/tree/master/dist/doc
+* Updated `plugins.js`
+* Updated `jquery.js` to 1.11.2
+* Updated `modernizr.js` to 2.8.3
+* Updated `respond.js` to 1.4.2 (from separate repo: https://github.com/scottjehl/Respond)
+* Updated `html5shiv-printshiv.js` to 3.7.3 (from separate repo: https://github.com/aFarkas/html5shiv)
+* Updated default viewport setting to `width=device-width, initial-scale=1`
+* Finally realized now that I am no longer hog-tied by the WP repo, I can finally, as always, _optionally_, offer the Google Analytics block here, so, ADDED!
+* Please note that, while HTML5 Boilerplate, and truly most of the rest of the world, has moved beyond IE6, 7, and even 8,
+  I retain things like IE Conditionals, IE-only CSS, etc., since you, the developer, can check or uncheck any of these options,
+  based on your individual project needs.
+* Updated `admin-style.css` to make sure if worked well on smaller screens, too
+* Renamed _LICENSE as LICENSE.txt and README as README.txt; and I'm done playing the Rename Game with these two, H5BP peeps...
+* Removed extraneous screenshot images from root
+* Tested & verified in WP 4.1.1
 
 = 4.4.2 2013-04-22 =
 * Updated <h2> to <h1> in main index loop, and wrapped <h1>s in <header>
