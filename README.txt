@@ -7,8 +7,8 @@ Stable tag: 5.0.1
 
 Based on the HTML5 Boilerplate (http://html5boilerplate.com/) created by
 Paul Irish (http://paulirish.com/) and Divya Manian (http://nimbupani.com/),
-this plug-in allows for easy inclusion and removal of all HTML5 Boilerplate options
-that are pertinent to WP.
+this plug-in allows for easy inclusion and removal of all HTML5 Boilerplate 
+options that are pertinent to WP.
 
 This theme might look like a little bit of a quagmire at first blush because
 it is a merger of two great themes with a very minor bit by me, but stay
@@ -18,10 +18,10 @@ More about this theme can be found at http://aarontgrogg.com/boilerplate/
 
 == Description ==
 
-Standing on the foreheads of giants (namely [Paul Irish](http://paulirish.com/)
-and [Divya Manian](http://nimbupani.com/) and the good folks that have helped
+Standing on the foreheads of giants (namely Paul Irish (http://paulirish.com/)
+and Divya Manian (http://nimbupani.com/) and the good folks that have helped
 them create and continue the growth of HTML5 Boilerplate, I present to you my
-first WordPress theme, [Boilerplate - Starkers WP Theme](http://aarontgrogg.com/boilerplate/).
+first WordPress theme, Boilerplate - Starkers WP Theme (http://aarontgrogg.com/boilerplate/).
 
 The clumsiest part of this is dealing with the Boilerplate CSS and JS files.
 To avoid any changes you make from being overwritten during upgrades,
@@ -45,9 +45,7 @@ all the delicious HTML5 Boilerplate goodness with the ease of checking checkboxe
 Please let me know if you have any questions/suggestions/thoughts,
 
 Atg
-
 http://aarontgrogg.com/
-
 aarontgrogg@gmail.com
 
 
@@ -139,7 +137,7 @@ aarontgrogg@gmail.com
 * Trying to convince the uploader to upload...
 
 = 4.3 2013-05-23 =
-* Big thanks to FrŽdŽric Bolduc for pointing out that jQuery was being added twice, once from the Google CDN,
+* Big thanks to Frï¿½dï¿½ric Bolduc for pointing out that jQuery was being added twice, once from the Google CDN,
   then again the local version, because I had `!window.jQuery || ...` instead of `window.jQuery || ...`  Doh!
 * And speaking of jQuery, updated the local version to 1.9.1.
 * Update to version 4.2.0 of HTML5 Boilerplate, including:
